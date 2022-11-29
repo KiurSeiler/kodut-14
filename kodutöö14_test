@@ -1,0 +1,22 @@
+import csv
+
+class Person:
+    def __init__(self, first_name, last_name, age):
+        self.first_name = first_name
+        self.last_name  = last_name
+        self.age        = age
+
+persons = []
+
+with open('nimed.csv', newline='\n') as csvfile:
+    spamreader = csv.reader(csvfile, delimiter=',')
+    for row in spamreader:
+        if len(row) == 0:
+            break
+        persons.append(Person(row[0], row[1], row[2]))
+
+with open('eggs.csv', 'w', newline='') as csvfile:
+    spamwriter = csv.writer(csvfile, delimiter=',')
+
+    for p in persons:
+        spamwriter.writerow([p.first_name, p.last_name])
